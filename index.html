@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI PAY! </title>
+    <link rel="stylesheet" href="style.css">
+    <script src="function.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="form-title">MobiKwik</h1>
+            <p class="form-subtitle">Enter your payment details</p>
+        </div>
+
+        <div class="form-card">
+            <form action="payment.html">
+                <div class="form-group">
+                    <label for="name">UPI Name</label>
+                    <input id="name" type="text" placeholder="Enter recipient name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount (₹)</label>
+                    <input id="amount" type="tel" placeholder="Enter amount" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Pay Now</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+
+</html>

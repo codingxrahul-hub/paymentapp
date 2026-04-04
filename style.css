@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #f8faff;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+    background-color: #fff;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header Section */
+.header {
+    background-color: #0052cc;
+    /*MobiKwikBlue*/color: white;
+    text-align: center;
+    padding: 20px 20px 60px 20px;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+}
+
+.nav-icons {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.success-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.circle {
+    width: 70px;
+    height: 70px;
+    border: #fff 4px solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkmark {
+    color: #17e146;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.status-text {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.amount {
+    font-size: 50px;
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+.recipient {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Details Card */
+.details-card {
+    border-color: #2b45c8 15px solid;
+    background: white;
+    margin: -40px 20px 20px 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-radius: 20px;
+    z-index: 10;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.label {
+    color: #494949;
+    font-size: 14px;
+}
+
+.value {
+    color: #434343;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.view-more {
+    text-align: right;
+    color: #0052cc;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Banner Section */
+.offer-banner {
+    background: linear-gradient(90deg, #020b3a 0%, #1a2a6c 100%);
+    margin: 20px;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.offer-title {
+    font-size: 16px;
+}
+
+.offer-sub {
+    font-size: 11px;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.avail-btn {
+    background: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #333;
+}
+
+.mock-card {
+    width: 100px;
+    height: 60px;
+    background: #4e73df;
+    border-radius: 5px;
+    position: absolute;
+    right: -10px;
+    bottom: 20px;
+    transform: rotate(-10deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+}
+
+/* Footer */
+.footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .upi_logo{
+        width: 60px;
+        height: 40px;
+        background: url('UPI-01.png') no-repeat center center;
+        background-size: contain;
+    }
+    padding:16px;
+}
+
+.mobikwik-logo{
+    font-style: italic;
+    color: #0052cc;
+    font-size: 18px;
+    margin: 16px;
+}
+
+/* Form Page Styling */
+.form-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-style: italic;
+    padding-top: 80px;
+    
+
+}
+
+.form-subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    padding-bottom: 60px;
+
+}
+
+.form-card {
+    background: white;
+    margin: -40px 20px 20px 20px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #494949;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0052cc;
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: #0052cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #003d99;
+}
