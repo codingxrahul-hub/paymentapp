@@ -30,12 +30,11 @@ body {
     /*MobiKwikBlue*/color: white;
     text-align: center;
     padding: 20px 20px 60px 20px;
-    border-radius: 0 0 20px 20px;
-    -webkit-border-radius: 0 0 20px 20px;
-    -moz-border-radius: 0 0 20px 20px;
-    -ms-border-radius: 0 0 20px 20px;
-    -o-border-radius: 0 0 20px 20px;
-    
+    border-radius: 0 0 10px 10px;
+    -webkit-border-radius: 0 0 10px 10px;
+    -moz-border-radius: 0 0 10px 10px;
+    -ms-border-radius: 0 0 10px 10px;
+    -o-border-radius: 0 0 10px 10px;
 }
 
 .nav-icons {
@@ -75,12 +74,12 @@ body {
 .amount {
     font-size: 50px;
     margin: 5px 0;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .recipient {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 460;
 }
 
 /* Details Card */
@@ -112,7 +111,7 @@ body {
 
 .value {
     color: #434343;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 14px;
 }
 
@@ -120,7 +119,7 @@ body {
     text-align: right;
     color: #0052cc;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     margin-top: 10px;
 }
@@ -194,6 +193,7 @@ body {
     height: 40px;
     background: url('mobikwik.svg') no-repeat center center;
     background-size: contain;
+}
 
 /* Form Page Styling */
 .form-title {
@@ -267,4 +267,155 @@ body {
 
 .submit-btn:hover {
     background-color: #003d99;
+}
+
+/* Circle Progress Animation */
+@keyframes circleAnimation {
+    from {
+        stroke-dashoffset: 282.7;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.circle-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.circle-svg {
+    width: 100px;
+    height: 100px;
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 4;
+}
+
+.circle-fill {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-dasharray: 282.7;
+    stroke-dashoffset: 282.7;
+    transition: stroke-dashoffset 0.5s ease;
+    -webkit-transition: stroke-dashoffset 0.5s ease;
+    -moz-transition: stroke-dashoffset 0.5s ease;
+    -ms-transition: stroke-dashoffset 0.5s ease;
+    -o-transition: stroke-dashoffset 0.5s ease;
+}
+
+.circle-fill.animating {
+    animation: circleAnimation 2s ease-in-out forwards;
+    -webkit-animation: circleAnimation 2s ease-in-out forwards;
+}
+
+.progress-text {
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.verify-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.upi-verify-card {
+    margin-top: 0;
+}
+
+.resend-text {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 15px;
+}
+
+.resend-link {
+    color: #0052cc;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.resend-link:hover {
+    text-decoration: underline;
+}
+
+.verify-btn {
+    margin-top: 20px;
+}
+
+/* Payment Page Circle Animation */
+@keyframes paymentCircleAnimation {
+    
+    to {
+        stroke-dashoffset: 0;
+        transform: scale(1);
+
+    }
+}
+
+.circle-completion {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+}
+
+.circle-svg-payment {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    transform: rotate(-90deg);
+}
+
+.circle-bg-payment {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 4;
+}
+
+.circle-fill-payment {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 282.7;
+    stroke-dashoffset: 282.7;
+    animation: paymentCircleAnimation 1.5s ease-out forwards;
+}
+
+.circle-completion .checkmark {
+    position: relative;
+    z-index: 2;
+    animation: scaleIn 0.6s ease-out 0.3s backwards;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
