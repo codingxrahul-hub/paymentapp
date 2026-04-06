@@ -175,26 +175,25 @@ body {
 /* Footer */
 .footer {
     position: absolute;
-    bottom: 20px;
+    bottom: 5px;
     width: 100%;
+    padding: 0 10px 0 10px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     .upi_logo{
-        width: 60px;
+        width: 80px;
         height: 40px;
         background: url('UPI-01.png') no-repeat center center;
         background-size: contain;
     }
-    padding:16px;
+    
 }
 
-.mobikwik-logo{
-    font-style: italic;
-    color: #0052cc;
-    font-size: 18px;
-    margin: 16px;
-}
+.mobi_logo{
+    width: 80px;
+    height: 40px;
+    background: url('mobikwik.svg') no-repeat center center;
+    background-size: contain;
 
 /* Form Page Styling */
 .form-title {
