@@ -10,18 +10,12 @@ function handlePaymentSubmit(event) {
         return;
     }
 
-    // Play UPI sound
-    const upiSound = new Audio('UPI_sound.mp3');
-    upiSound.play().catch(error => console.log('Audio play error:', error));
-
     // Store data in localStorage
     localStorage.setItem('recipientName', name);
     localStorage.setItem('paymentAmount', amount);
 
-    // Redirect to payment page after a delay to allow sound to play
-    setTimeout(function() {
-        window.location.href = 'payment.html';
-    }, 500);
+    // Redirect to payment page immediately
+    window.location.href = 'payment.html';
 }
 
 // Load and display payment details on payment.html
@@ -40,6 +34,12 @@ function loadPaymentDetails() {
     if (recipientElement) {
         recipientElement.textContent = 'to ' + recipientName;
     }
+
+    // Play UPI sound with a 0.2s (200ms) delay after switched to payment page
+    setTimeout(function() {
+        const upiSound = new Audio('UPI_sound.mp3');
+        upiSound.play().catch(error => console.log('Audio play error:', error));
+    }, 200);
 }
 
 // Run on page load
