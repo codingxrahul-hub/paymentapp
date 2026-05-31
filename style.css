@@ -26,11 +26,11 @@ body {
 /* Header Section */
 .header {
     background-color: #0052cc;
-    /*MobiKwikBlue*/color: white;
+    /*MobiKwikBlue*/
+    color: white;
     text-align: center;
-    padding: 20px 20px 60px 20px;
-    border-radius: 0 0 15px 15px;
-    
+    padding: 10px 20px 60px 20px;
+    border-radius: 0 0 16px 16px;
 }
 
 .nav-icons {
@@ -46,20 +46,41 @@ body {
     margin-bottom: 15px;
 }
 
-.circle {
-    width: 70px;
-    height: 70px;
-    border: #fff 4px solid;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.success-svg {
+    width: 78px;
+    height: 78px;
 }
 
-.checkmark {
-    color: #17e146;
-    font-size: 40px;
-    font-weight: bold;
+.success-circle {
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    animation: drawCircle 1.5s ease-out forwards;
+    transform: rotate(-90deg);
+    transform-origin: 50px 50px;
+}
+
+.success-checkmark {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: drawCheckmark 0.6s ease-out 0.9s forwards;
+}
+
+@keyframes drawCircle {
+    from {
+        stroke-dashoffset: 283;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes drawCheckmark {
+    from {
+        stroke-dashoffset: 60;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
 .status-text {
@@ -152,29 +173,29 @@ body {
     color: #333;
 }
 
-.mock-card {
-    width: 100px;
-    height: 60px;
-    background: #4e73df;
-    border-radius: 5px;
+.first-card-img {
+    width: 110px;
+    height: auto;
     position: absolute;
     right: -10px;
-    bottom: 20px;
-    transform: rotate(-10deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-style: italic;
+    bottom: 12px;
+    transform: rotate(-12deg);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Footer */
 .footer {
     position: absolute;
-    bottom: 5px;
+    bottom: 10px;
     width: 100%;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
-    .upi_logo{
+    align-items: center;
+    padding: 0 20px;
+
+    .upi_logo {
         width: 100px;
         height: 40px;
         background: url('UPI-01.png') no-repeat center center;
@@ -182,12 +203,9 @@ body {
     }
 }
 
-.mobikwik-logo{
-    font-style: italic;
-    color: #0052cc;
-    font-size: 18px;
-    margin-right: 10px;
-    padding-top: 5px;
+.mobikwik-logo {
+    height: 30px;
+    fill: #0052cc;
 }
 
 /* Form Page Styling */
@@ -197,7 +215,7 @@ body {
     margin-bottom: 2px;
     font-style: italic;
     padding-top: 80px;
-    
+
 
 }
 
