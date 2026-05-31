@@ -1,6 +1,5 @@
 * {
     margin: 0;
-
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -18,7 +17,6 @@ body {
 .container {
     width: 100%;
     max-width: 400px;
-    margin-top: 10px;
     background-color: #fff;
     min-height: 100vh;
     position: relative;
@@ -175,7 +173,7 @@ body {
 /* Footer */
 .footer {
     position: absolute;
-    bottom: 20px;
+    bottom: 5px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -185,7 +183,6 @@ body {
         background: url('UPI-01.png') no-repeat center center;
         background-size: contain;
     }
-    padding:16px;
 }
 
 .mobikwik-logo{
@@ -193,6 +190,7 @@ body {
     color: #0052cc;
     font-size: 18px;
     margin-right: 10px;
+    padding-top: 5px;
 }
 
 /* Form Page Styling */
