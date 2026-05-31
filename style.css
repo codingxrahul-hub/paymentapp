@@ -1,504 +1,235 @@
-/* ═══════════════════════════════════════════════
-   BASE RESET & CSS VARIABLES
-═══════════════════════════════════════════════ */
-*, *::before, *::after {
+* {
     margin: 0;
+
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-:root {
-    --blue:        #0052cc;
-    --blue-dark:   #003d99;
-    --blue-light:  #e8f0fe;
-    --green:       #22c55e;
-    --text-dark:   #1a1a2e;
-    --text-mid:    #494949;
-    --text-light:  #888;
-    --card-shadow: 0 8px 30px rgba(0, 82, 204, 0.13);
-}
-
 body {
-    background: #f0f4ff;
+    background-color: #f8faff;
     display: flex;
     justify-content: center;
-    min-height: 100vh;
+    overflow: hidden;
 }
 
-/* ── Confetti canvas ──────────────────────────── */
-#confettiCanvas {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9999;
-}
 
-/* ═══════════════════════════════════════════════
-   CONTAINER
-═══════════════════════════════════════════════ */
+
 .container {
     width: 100%;
     max-width: 400px;
-    background: #fff;
+    margin-top: 10px;
+    background-color: #fff;
     min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding-bottom: 80px;
-}
-
-/* ═══════════════════════════════════════════════
-   SHARED ENTRANCE ANIMATIONS
-═══════════════════════════════════════════════ */
-@keyframes fadeslide {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0);    }
-}
-@keyframes slideup {
-    from { opacity: 0; transform: translateY(32px); }
-    to   { opacity: 1; transform: translateY(0);    }
-}
-
-.anim-fadeslide {
-    opacity: 0;
-    animation: fadeslide 0.55s ease forwards;
-    animation-delay: var(--d, 0s);
-}
-.anim-slideup {
-    opacity: 0;
-    animation: slideup 0.6s cubic-bezier(0.22, 0.68, 0, 1.2) forwards;
-    animation-delay: var(--d, 0s);
-}
-
-/* ═══════════════════════════════════════════════
-   HEADER  (payment page)
-═══════════════════════════════════════════════ */
-.header {
-    background: linear-gradient(160deg, #0062f5 0%, #0041aa 100%);
-    color: #fff;
-    text-align: center;
-    padding: 20px 20px 72px;
-    border-radius: 0 0 28px 28px;
     position: relative;
     overflow: hidden;
 }
 
-/* Radial glare overlay */
-.header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% -20%, rgba(255,255,255,0.18) 0%, transparent 70%);
-    pointer-events: none;
+/* Header Section */
+.header {
+    background-color: #0052cc;
+    /*MobiKwikBlue*/color: white;
+    text-align: center;
+    padding: 20px 20px 60px 20px;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
 }
 
-/* ── Nav Icons ─────────────────────────────── */
 .nav-icons {
     display: flex;
     justify-content: space-between;
     font-size: 20px;
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeslide 0.4s ease 0.1s forwards;
+    margin-bottom: 20px;
 }
 
-/* ═══════════════════════════════════════════════
-   CIRCLE  +  CHECKMARK  +  RIPPLES
-═══════════════════════════════════════════════ */
-.circle-completion {
-    width: 110px;
-    height: 110px;
-    position: relative;
+.success-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.circle {
+    width: 70px;
+    height: 70px;
+    border: #fff 4px solid;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 18px;
 }
 
-.circle-svg-payment {
-    width: 110px;
-    height: 110px;
-    position: absolute;
-    top: 0; left: 0;
-    transform: rotate(-90deg);
-}
-
-.circle-bg-payment {
-    fill: none;
-    stroke: rgba(255, 255, 255, 0.22);
-    stroke-width: 5;
-}
-
-/* Stroke draw animation */
-@keyframes strokeDraw {
-    from { stroke-dashoffset: 276.5; }
-    to   { stroke-dashoffset: 0;     }
-}
-
-.circle-fill-payment {
-    fill: none;
-    stroke: #fff;
-    stroke-width: 5;
-    stroke-linecap: round;
-    stroke-dasharray: 276.5;
-    stroke-dashoffset: 276.5;
-    animation: strokeDraw 1.1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
-}
-
-/* SVG checkmark path draw */
-.check-svg {
-    position: absolute;
-    width: 56px;
-    height: 56px;
-    z-index: 2;
-}
-
-@keyframes checkDraw {
-    from { stroke-dashoffset: 60; opacity: 0; }
-    to   { stroke-dashoffset: 0;  opacity: 1; }
-}
-
-.check-path {
-    fill: none;
-    stroke: #4ade80;
-    stroke-width: 5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 60;
-    stroke-dashoffset: 60;
-    animation: checkDraw 0.5s ease-out 1.25s forwards;
-}
-
-/* Ripple rings */
-@keyframes ripple {
-    0%   { transform: scale(0.6); opacity: 0.55; }
-    100% { transform: scale(2.2); opacity: 0;    }
-}
-
-.ripple {
-    position: absolute;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.45);
-    animation: ripple 2.2s ease-out infinite;
-    pointer-events: none;
-}
-.r1 { animation-delay: 0.2s;  }
-.r2 { animation-delay: 0.85s; }
-.r3 { animation-delay: 1.5s;  }
-
-/* Amount bounce-in */
-@keyframes scaleIn {
-    from { transform: scale(0.7); opacity: 0; }
-    to   { transform: scale(1);   opacity: 1; }
+.checkmark {
+    color: #17e146;
+    font-size: 40px;
+    font-weight: bold;
 }
 
 .status-text {
-    font-size: 15px;
-    opacity: 0.88;
-    letter-spacing: 0.4px;
+    font-size: 18px;
+    opacity: 0.9;
 }
 
 .amount {
-    font-size: 52px;
-    font-weight: 300;
-    letter-spacing: -1px;
-    margin: 6px 0 4px;
-    animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.1s both;
+    font-size: 50px;
+    margin: 5px 0;
+    font-weight: 600;
 }
 
 .recipient {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
-    opacity: 0.85;
 }
 
-/* ═══════════════════════════════════════════════
-   DETAILS CARD
-═══════════════════════════════════════════════ */
+/* Details Card */
 .details-card {
-    background: #fff;
-    margin: -48px 16px 16px;
-    padding: 22px 20px 14px;
-    border-radius: 20px;
-    box-shadow: var(--card-shadow);
+    border-color: #2b45c8 15px solid;
+    background: white;
+    margin: -40px 20px 20px 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: relative;
+    border-radius: 20px;
     z-index: 10;
-}
-
-.divider {
-    border: none;
-    border-top: 1px solid #f0f0f0;
-    margin: 12px 0;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 
 .row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    margin-bottom: 15px;
 }
 
 .label {
-    color: var(--text-light);
-    font-size: 13px;
+    color: #494949;
+    font-size: 14px;
 }
 
 .value {
-    color: var(--text-dark);
-    font-weight: 600;
-    font-size: 13px;
-}
-
-.txn-id {
-    font-size: 11px;
-    letter-spacing: 0.5px;
-    color: #555;
-    font-family: monospace;
+    color: #434343;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .view-more {
     text-align: right;
-    color: var(--blue);
-    font-size: 13px;
+    color: #0052cc;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
-/* ═══════════════════════════════════════════════
-   STATUS PILLS  (Deducted → Processed → Received)
-═══════════════════════════════════════════════ */
-.status-pills {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 16px 16px;
-    padding: 14px 10px;
-    background: #f6fff9;
-    border-radius: 14px;
-    border: 1px solid #d1fae5;
-}
-
-.pill {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--green);
-    flex: 1;
-    opacity: 0;
-}
-
-@keyframes pillPop {
-    0%   { transform: scale(0);    opacity: 0; }
-    70%  { transform: scale(1.15);             }
-    100% { transform: scale(1);    opacity: 1; }
-}
-
-.pill:nth-child(1) { animation: pillPop 0.4s ease 1.65s forwards; }
-.pill:nth-child(3) { animation: pillPop 0.4s ease 1.9s  forwards; }
-.pill:nth-child(5) { animation: pillPop 0.4s ease 2.15s forwards; }
-
-.pill-connector {
-    height: 2px;
-    flex: 0.5;
-    background: linear-gradient(90deg, #22c55e, #86efac);
-    border-radius: 2px;
-    opacity: 0;
-    animation: fadeslide 0.3s ease 2.1s forwards;
-}
-
-/* ═══════════════════════════════════════════════
-   OFFER BANNER
-═══════════════════════════════════════════════ */
+/* Banner Section */
 .offer-banner {
-    background: linear-gradient(120deg, #020b3a 0%, #0a1e6e 60%, #1a3a8f 100%);
-    margin: 0 16px 16px;
-    border-radius: 18px;
-    padding: 18px 20px;
+    background: linear-gradient(90deg, #020b3a 0%, #1a2a6c 100%);
+    margin: 20px;
+    border-radius: 15px;
+    padding: 20px;
     display: flex;
-    align-items: center;
-    color: #fff;
+    color: white;
     position: relative;
     overflow: hidden;
-    min-height: 90px;
 }
-
-.offer-banner::after {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 130px; height: 130px;
-    background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.banner-content { flex: 1; }
 
 .offer-title {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 4px;
+    font-size: 16px;
 }
 
 .offer-sub {
     font-size: 11px;
-    opacity: 0.75;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
+    opacity: 0.8;
 }
 
 .avail-btn {
-    background: #fff;
+    background: white;
     border: none;
-    padding: 7px 16px;
+    padding: 8px 15px;
     border-radius: 20px;
-    font-weight: 700;
-    font-size: 11px;
-    color: #0052cc;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.avail-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(255,255,255,0.25);
-}
-
-/* Floating mock card */
-@keyframes cardFloat {
-    0%,100% { transform: rotate(-12deg) translateY(0px);   }
-    50%      { transform: rotate(-12deg) translateY(-5px);  }
+    font-weight: bold;
+    font-size: 12px;
+    color: #333;
 }
 
 .mock-card {
-    width: 88px;
-    height: 55px;
-    background: linear-gradient(135deg, #4e73df 0%, #6fa1ff 100%);
-    border-radius: 8px;
+    width: 100px;
+    height: 60px;
+    background: #4e73df;
+    border-radius: 5px;
     position: absolute;
-    right: -8px;
-    bottom: 14px;
-    transform: rotate(-12deg);
+    right: -10px;
+    bottom: 20px;
+    transform: rotate(-10deg);
     display: flex;
     align-items: center;
     justify-content: center;
     font-style: italic;
-    font-size: 12px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.85);
-    overflow: hidden;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    animation: cardFloat 3s ease-in-out 2.3s infinite;
 }
 
-.card-shine {
-    position: absolute;
-    top: -20px; left: -20px;
-    width: 60px; height: 60px;
-    background: rgba(255,255,255,0.18);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.card-label { position: relative; z-index: 1; }
-
-/* ═══════════════════════════════════════════════
-   ACTION BUTTONS  (Home / Receipt / Share)
-═══════════════════════════════════════════════ */
-.action-btns {
-    display: flex;
-    justify-content: space-around;
-    margin: 0 16px 16px;
-    padding: 16px 8px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
-}
-
-.action-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--blue);
-    padding: 10px 16px;
-    border-radius: 12px;
-    transition: background 0.2s, transform 0.2s;
-}
-.action-btn:hover {
-    background: var(--blue-light);
-    transform: translateY(-2px);
-}
-.action-btn:active { transform: translateY(0); }
-
-/* ═══════════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════════ */
+/* Footer */
 .footer {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     width: 100%;
-    padding: 0 16px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    .upi_logo{
+        width: 100px;
+        height: 40px;
+        background: url('UPI-01.png') no-repeat center center;
+        background-size: contain;
+    }
+    padding:16px;
 }
 
-.upi_logo {
-    width: 80px;
-    height: 36px;
-    background: url('UPI-01.png') no-repeat center center;
-    background-size: contain;
+.mobikwik-logo{
+    font-style: italic;
+    color: #0052cc;
+    font-size: 18px;
+    margin-right: 10px;
 }
 
-.mobi_logo {
-    width: 80px;
-    height: 36px;
-    background: url('mobikwik.svg') no-repeat center center;
-    background-size: contain;
-}
-
-/* ═══════════════════════════════════════════════
-   INDEX  /  FORM PAGE
-═══════════════════════════════════════════════ */
+/* Form Page Styling */
 .form-title {
     font-size: 28px;
     font-weight: 600;
+    margin-bottom: 2px;
     font-style: italic;
     padding-top: 80px;
-    margin-bottom: 4px;
+    
+
 }
 
 .form-subtitle {
     font-size: 14px;
     opacity: 0.9;
     padding-bottom: 60px;
+
 }
 
 .form-card {
-    background: #fff;
-    margin: -40px 20px 20px;
+    background: white;
+    margin: -40px 20px 20px 20px;
     padding: 30px 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 10;
-    border-radius: 14px;
+    border-radius: 10px;
 }
 
-.form-group { margin-bottom: 20px; }
+.form-group {
+    margin-bottom: 20px;
+}
 
 .form-group label {
     display: block;
-    color: var(--text-mid);
+    color: #494949;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 8px;
@@ -508,31 +239,32 @@ body {
     width: 100%;
     padding: 12px 15px;
     font-size: 14px;
-    border: 1.5px solid #e0e0e0;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
 }
+
 .form-group input:focus {
     outline: none;
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(0,82,204,0.1);
+    border-color: #0052cc;
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
 }
 
 .submit-btn {
     width: 100%;
     padding: 14px 20px;
-    background: var(--blue);
-    color: #fff;
+    background-color: #0052cc;
+    color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
-    transition: background 0.3s, transform 0.2s;
+    transition: background-color 0.3s;
 }
+
 .submit-btn:hover {
-    background: var(--blue-dark);
-    transform: translateY(-1px);
+    background-color: #003d99;
 }
-.submit-btn:active { transform: translateY(0); }
