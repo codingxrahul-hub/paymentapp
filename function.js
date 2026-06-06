@@ -9,8 +9,11 @@ function showLoadingAnimation() {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         z-index: 9999;
@@ -25,6 +28,28 @@ function showLoadingAnimation() {
         width: 50px;
         height: 50px;
         animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+    `;
+
+    // Create loading text
+    const loadingText = document.createElement('div');
+    loadingText.style.cssText = `
+        font-size: 16px;
+        color: #0052cc;
+        font-weight: 500;
+        letter-spacing: 2px;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    `;
+    loadingText.textContent = 'Completing';
+
+    // Create blinking dots
+    const dots = document.createElement('span');
+    dots.id = 'blinking-dots';
+    dots.style.cssText = `
+        display: inline-block;
+        width: 20px;
+        text-align: left;
+        margin-left: 5px;
     `;
 
     // Add animation styles
@@ -34,10 +59,51 @@ function showLoadingAnimation() {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        @keyframes blink {
+            0%, 20% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .dot {
+            animation: blink 1.4s infinite;
+            display: inline-block;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
     `;
     document.head.appendChild(style);
 
+    // Create individual dots
+    const dot1 = document.createElement('span');
+    dot1.className = 'dot';
+    dot1.textContent = '.';
+    const dot2 = document.createElement('span');
+    dot2.className = 'dot';
+    dot2.textContent = '.';
+    const dot3 = document.createElement('span');
+    dot3.className = 'dot';
+    dot3.textContent = '.';
+
+    dots.appendChild(dot1);
+    dots.appendChild(dot2);
+    dots.appendChild(dot3);
+
+    loadingText.appendChild(dots);
+
     loadingOverlay.appendChild(spinner);
+    loadingOverlay.appendChild(loadingText);
     document.body.appendChild(loadingOverlay);
 
     return loadingOverlay;
