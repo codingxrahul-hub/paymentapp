@@ -86,18 +86,18 @@ body {
 .status-text {
     font-size: 14px;
     opacity: 0.9;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 .amount {
     font-size: 40px;
     margin: 5px 0;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .recipient {
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 /* Details Card */
@@ -125,12 +125,12 @@ body {
 .label {
     color: #494949;
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 .value {
     color: #434343;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 12px;
 }
 
@@ -138,9 +138,45 @@ body {
     text-align: right;
     color: #0052cc;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 500;
     cursor: pointer;
     margin-top: 10px;
+    transition: color 0.2s;
+}
+
+.view-more:hover {
+    color: #003d99;
+}
+
+/* Order ID and Transaction ID rows */
+.order-row .label,
+.tx-row .label {
+    color: #494949;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.order-row .value,
+.tx-row .value {
+    color: #434343;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.order-row,
+.tx-row {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Banner Section */
@@ -157,14 +193,14 @@ body {
 
 .offer-title {
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .offer-sub {
     font-size: 10px;
     margin-bottom: 15px;
     opacity: 0.8;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 .avail-btn {
@@ -227,7 +263,7 @@ body {
     font-size: 12px;
     opacity: 0.9;
     padding-bottom: 60px;
-    font-weight: 300;
+    font-weight: 500;
 
 }
 
@@ -249,7 +285,7 @@ body {
     display: block;
     color: #494949;
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 500;
     margin-bottom: 8px;
 }
 
@@ -261,7 +297,7 @@ body {
     border-radius: 8px;
     box-sizing: border-box;
     transition: border-color 0.3s;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 .form-group input:focus {
