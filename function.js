@@ -134,6 +134,68 @@ function handlePaymentSubmit(event) {
     }, 3000);
 }
 
+// Generate random IDs
+function randomUpper() {
+    return String.fromCharCode(65 + Math.floor(Math.random() * 26));
+}
+
+function generateOrderId() {
+    // One capital letter + 6 digit number
+    const letter = randomUpper();
+    const num = Math.floor(100000 + Math.random() * 900000); // 6 digits
+    return letter + '-' + num;
+}
+
+function generateTransactionId() {
+    // 10 digit number
+    return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+}
+
+// Expand details card and insert order/transaction ids
+function toggleDetailsCard() {
+    const detailsCard = document.querySelector('.details-card');
+    if (!detailsCard) return;
+
+    const isExpanded = detailsCard.classList.contains('expanded');
+
+    if (!isExpanded) {
+        // Expand size (smooth transition)
+        detailsCard.style.transition = 'all 0.25s ease';
+        detailsCard.style.padding = '28px';
+        detailsCard.style.margin = '-60px 12px 20px 12px';
+        detailsCard.style.transform = 'scale(1.01)';
+
+        // Add generated values if not present
+        if (!detailsCard.querySelector('.order-row')) {
+            const orderRow = document.createElement('div');
+            orderRow.className = 'row order-row';
+            orderRow.innerHTML = `<span class="label">Order ID</span><span class="value order-id">${generateOrderId()}</span>`;
+            detailsCard.appendChild(orderRow);
+        }
+
+        if (!detailsCard.querySelector('.tx-row')) {
+            const txRow = document.createElement('div');
+            txRow.className = 'row tx-row';
+            txRow.innerHTML = `<span class="label">Transaction ID</span><span class="value tx-id">${generateTransactionId()}</span>`;
+            detailsCard.appendChild(txRow);
+        }
+
+        detailsCard.classList.add('expanded');
+    } else {
+        // Collapse
+        detailsCard.style.padding = '';
+        detailsCard.style.margin = '';
+        detailsCard.style.transform = '';
+        detailsCard.classList.remove('expanded');
+
+        // Optionally remove the generated rows if you want to recreate them next time
+        const orderRow = detailsCard.querySelector('.order-row');
+        const txRow = detailsCard.querySelector('.tx-row');
+        if (orderRow) orderRow.remove();
+        if (txRow) txRow.remove();
+    }
+}
+
 // Load and display payment details on payment.html
 function loadPaymentDetails() {
     const recipientName = localStorage.getItem('recipientName') || 'Guest';
@@ -163,6 +225,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if we're on payment page
     if (document.querySelector('.form-card') === null && document.querySelector('.amount')) {
         loadPaymentDetails();
+
+        // Attach view-more click handler
+        const viewMore = document.querySelector('.view-more');
+        if (viewMore) {
+            viewMore.addEventListener('click', function() {
+                toggleDetailsCard();
+            });
+        }
     }
 
     // Attach form listener on index page
