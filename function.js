@@ -1,3 +1,48 @@
+// Show loading animation
+function showLoadingAnimation() {
+    // Create loading overlay
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.id = 'loading-overlay';
+    loadingOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    `;
+
+    // Create spinner
+    const spinner = document.createElement('div');
+    spinner.style.cssText = `
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #0052cc;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+    `;
+
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    loadingOverlay.appendChild(spinner);
+    document.body.appendChild(loadingOverlay);
+
+    return loadingOverlay;
+}
+
 // Handle form submission on index.html
 function handlePaymentSubmit(event) {
     event.preventDefault();
@@ -14,8 +59,13 @@ function handlePaymentSubmit(event) {
     localStorage.setItem('recipientName', name);
     localStorage.setItem('paymentAmount', amount);
 
-    // Redirect to payment page immediately
-    window.location.href = 'payment.html';
+    // Show loading animation for 3 seconds
+    showLoadingAnimation();
+
+    // Redirect to payment page after 3 seconds
+    setTimeout(function() {
+        window.location.href = 'payment.html';
+    }, 3000);
 }
 
 // Load and display payment details on payment.html
@@ -35,11 +85,11 @@ function loadPaymentDetails() {
         recipientElement.textContent = 'to ' + recipientName;
     }
 
-    // Play UPI sound with a 0.2s (200ms) delay after switched to payment page
+    // Play UPI sound after payment page loads (0.5s delay for animation to start)
     setTimeout(function() {
         const upiSound = new Audio('UPI_sound.mp3');
         upiSound.play().catch(error => console.log('Audio play error:', error));
-    }, 200);
+    }, 500);
 }
 
 // Run on page load
@@ -59,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const backArrow = document.querySelector('.back-arrow');
     if (backArrow) {
         backArrow.addEventListener('click', function() {
+            clearPaymentData();
             window.location.href = 'index.html';
         });
     }
